@@ -18,7 +18,7 @@
 
   "Mappings" : {
     "RegionMap" : {
-    "ap-southeast-1"      : { "AMI" : "ami-836dfdb9" }
+    "ap-southeast-2"      : { "AMI" : "ami-836dfdb9" }
     }
   },
 
@@ -54,7 +54,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.small",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "named"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -63,7 +63,7 @@
             "wget --no-check-certificate https://raw.github.com/openshift/openshift-extras/master/aws-cloudformation/ose-origin-owindsor-amz.sh","\n",
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_INSTALL_COMPONENTS='named'","\n",
-            "sh ose-1.1-amz.sh 'ID_NAMED' '", {"Ref" : "NamedWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_NAMED' '", {"Ref" : "NamedWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
@@ -115,7 +115,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.large",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "mongo"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -124,7 +124,7 @@
             "wget --no-check-certificate https://raw.github.com/openshift/openshift-extras/master/aws-cloudformation/ose-origin-owindsor-amz.sh","\n",
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_INSTALL_COMPONENTS='datastore'","\n",
-            "sh ose-1.1-amz.sh 'ID_MONGO' '", {"Ref" : "MongoWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_MONGO' '", {"Ref" : "MongoWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
@@ -164,7 +164,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.large",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "activemq"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -173,7 +173,7 @@
             "wget --no-check-certificate https://raw.github.com/openshift/openshift-extras/master/aws-cloudformation/ose-origin-owindsor-amz.sh","\n",
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_INSTALL_COMPONENTS='activemq'","\n",
-            "sh ose-1.1-amz.sh 'ID_ACTIVEMQ' '", {"Ref" : "ActiveMQWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_ACTIVEMQ' '", {"Ref" : "ActiveMQWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
@@ -211,7 +211,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.large",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "broker"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -221,7 +221,7 @@
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_NAMED_IP_ADDR='", {"Fn::GetAtt" : [ "NamedInstance", "PublicIp" ]}, "'\n",
             "export CONF_INSTALL_COMPONENTS='broker'","\n",
-            "sh ose-1.1-amz.sh 'ID_BROKER' '", {"Ref" : "BrokerWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_BROKER' '", {"Ref" : "BrokerWaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
@@ -258,7 +258,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.large",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "node1"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -268,7 +268,7 @@
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_INSTALL_COMPONENTS='node'","\n",
             "export CONF_NODE_HOSTNAME='", { "Fn::Join" : [ "", ["node1", ".", {"Ref" : "Prefix"}, ".", {"Ref" : "HostedZone"}]] }, "'\n",
-            "sh ose-1.1-amz.sh 'ID_BROKER' '", {"Ref" : "Node1WaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_BROKER' '", {"Ref" : "Node1WaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
@@ -304,7 +304,7 @@
       "Properties" : {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
         "InstanceType" : "m1.large",
-        "KeyName" : "libra",
+        "KeyName" : "OpenShift-admin",
         "SecurityGroups" : [ {"Ref" : "StandardSecurityGroup"} ],
         "Tags" : [{"Key" : "Name", "Value" : { "Fn::Join" : ["-",["openshift", {"Ref":"Prefix"}, "node2"]]}}],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
@@ -314,7 +314,7 @@
             "export CONF_PREFIX='", { "Ref" : "Prefix" } , "'\n",
             "export CONF_INSTALL_COMPONENTS='node'","\n",
             "export CONF_NODE_HOSTNAME='", { "Fn::Join" : [ "", ["node2", ".", {"Ref" : "Prefix"}, ".", {"Ref" : "HostedZone"}]] }, "'\n",
-            "sh ose-1.1-amz.sh 'ID_BROKER' '", {"Ref" : "Node2WaitForInstanceWaitHandle"} ,"'", "\n"]]}}
+            "sh ose-origin-owindsor-amz.sh 'ID_BROKER' '", {"Ref" : "Node2WaitForInstanceWaitHandle"} ,"'", "\n"]]}}
       }
     },
 
