@@ -42,7 +42,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNEHQ/8w/6VCF8G2LbDs6tV9T6ayOcDaOLs0TQEcDR
 KEYS
 }
 
-configure_openshit_core()
+configure_openshift_core_repo()
 {
   # Enable repo with the puddle for broker packages.
   cat > /etc/yum.repos.d/openshift-core.repo <<YUM
@@ -1287,8 +1287,8 @@ set_defaults()
 
   # Where to find the OpenShift repositories; just the base part before
   # splitting out into Infrastructure/Node/etc.
-  repos_base_default='https://mirror.openshift.com/enterprise/enterprise-1.1/openshift_repositories'
-  repos_base="${CONF_REPOS_BASE:-${repos_base_default}}"
+  #repos_base_default='https://mirror.openshift.com/enterprise/enterprise-1.1/openshift_repositories'
+  #repos_base="${CONF_REPOS_BASE:-${repos_base_default}}"
 
   # The domain name for the OpenShift Enterprise installation.
   domain="${CONF_DOMAIN:-example.com}"
@@ -1367,15 +1367,12 @@ is_false "$CONF_NO_NTP" && synchronize_clock
 is_false "$CONF_NO_SSH_KEYS" && install_ssh_keys
 
 
-configure_rhel_repo
+configure_openshift_core_repo
 if activemq || broker || datastore
 then
-  configure_broker_repo
+  configure_openshift_core_repo
 fi
-node && configure_node_repo
-node && configure_jbosseap_cartridge_repo
-node && configure_jbosseap_subscription
-node && configure_jbossews_subscription
+node && configure_openshift_core_repo
 broker && configure_client_tools_repo
 
 yum update -y
