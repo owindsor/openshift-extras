@@ -46,7 +46,7 @@ configure_openshift_core_repo()
 {
   # Enable repo with the puddle for broker packages.
   cat > /etc/yum.repos.d/openshift-core.repo <<YUM
-[rhel]
+[openshift-core]
 name=OpenShift Core
 baseurl=https://mirror.openshift.com/pub/origin-server/release/1/rhel-6/dependancies/x86_64/
 enabled=1
